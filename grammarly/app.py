@@ -6,6 +6,7 @@ app = Chalice(app_name='grammarly')
 
 @app.route('/', methods=['POST'], cors=True)
 def index():
+    print("Hello World")
     # using the tool  
     my_tool = language_tool_python.LanguageTool('en-US')  
     
@@ -43,4 +44,4 @@ def index():
     my_NewText = "".join(my_NewText)
 
     # printing the text
-    return Response(body={"text": my_NewText}, status_code=200)
+    return Response(body={"text": my_NewText, "errors": list(zip(myMistakes, myCorrections))}, status_code=200)
